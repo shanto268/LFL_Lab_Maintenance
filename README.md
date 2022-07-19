@@ -22,7 +22,7 @@ Automated email program to remind grad students of lab maintenance duties when i
 
 - [x] Run test
 
-- [] Run test through Scheduler
+- [x] Run test through Scheduler
 
 - [x] Last to first update rule add
 
