@@ -20,8 +20,10 @@ from email.encoders import encode_base64
 from email.mime.base import MIMEBase
 from email.mime.application import MIMEApplication
 
+PWD = os.getcwd()
+
 #Email vairables
-load_dotenv(".env")
+load_dotenv(PWD+"\\.env")
 SMTP_SERVER = os.environ.get("SMTP_SERVER")
 SMTP_PORT = 587
 GMAIL_USERNAME =  os.environ.get("EMAIL_ID")
