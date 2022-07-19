@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 ===========================================
-Program : custom_mass_email/Emailer.py
+Program : LFL_Lab_Maintenance/Emailer.py
 ===========================================
 Summary:
 """
@@ -83,32 +83,6 @@ class Emailer:
         server.send_message(msg)
         server.close()
 
-    def sendmail(self):
-        #Headers
-        recipient = self.email_list
-        subject = self.subjectLine
-        content = self.emailContent
-        headers = [
-            "From:" + GMAIL_USERNAME, "Subject:" + subject, "To: " + recipient,
-            "MIME-Version: 1.0", "Content-Type: text/plain"
-        ]
-        headers = "\r\n".join(headers)
-
-        #Connect to Gmail Server
-        session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        session.ehlo()
-        session.starttls()
-        session.ehlo()
-
-        #Gmail Login
-        session.login(GMAIL_USERNAME, GMAIL_PASSWORD)
-
-        #Send email then exit
-        session.sendmail(GMAIL_USERNAME, recipient,
-                         headers + "\r\n\r\n" + content)
-        # session.quit()
-        session.close()
-
     def sendtext(self):
         recipient=self.email_list
         subject=self.subjectLine
@@ -131,4 +105,4 @@ class Emailer:
         emails = self.email_list
         for email in emails:
             print("Emailing {}".format(email))
-            self.sendmail(email, self.subjectLine, self.emailContent)
+            self.send_email()
