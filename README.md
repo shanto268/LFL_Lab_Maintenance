@@ -12,7 +12,7 @@ Automated email program to remind grad students of lab maintenance duties when i
 
 # To Do:
 
-- [ ] Write scheduler scripts for Windows 🤮: [walk_through](https://www.youtube.com/watch?v=ic4lUiDTbVI)
+- [x] Write scheduler scripts for Windows 🤮: [walk_through](https://www.youtube.com/watch?v=ic4lUiDTbVI)
 
 - [x] Deploy on LFL computer and install python dependencies
 
@@ -21,6 +21,8 @@ Automated email program to remind grad students of lab maintenance duties when i
 - [x] Add `lab_members.json` file
 
 - [x] Run test
+
+- [] Run test through Scheduler
 
 - [x] Last to first update rule add
 
