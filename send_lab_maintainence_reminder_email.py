@@ -24,6 +24,7 @@ if __name__ == "__main__":
     # content of email
     ln2_instruction = "Liquid Nitrogen Fill Up with Megan @ {}".format(ln2time)
     instructions = [ln2_instruction, "Check Lab Inventory: napkins, water filters, gloves, masks, printing supply, compressed air", "Check Chemical Inventory", "Assess Water Filter Status", "Check cooling water temperature and pressure", "Fill up traps and dewars with LN2", "General Cleanup of the Lab (call people out if needed)"]
+    reminders = ["👖 Wear full pants on Lab Maintenance Day", "🚫 Don't reuse gloves", "🦠 Don't touch non-contaminated items with gloves", "🧤 Wear thermal gloves when working with LN2", "🥼🥽 Wear safety coat and goggles", "👥 Use the buddy system if not comfortable doing a task alone"]
 
     """
     Logic:
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     recipient_name, recipient_email = extract_lab_maintainer()
 
     # create email for lab maintainer
-    email_content = create_email_content(recipient_name, date_maintenance, instructions)
+    email_content = create_email_content(recipient_name, date_maintenance, instructions, reminders)
     subjectLine = "LFL Lab Maintenance Reminder ({})".format(date_maintenance)
 
     # send email to lab maintainer

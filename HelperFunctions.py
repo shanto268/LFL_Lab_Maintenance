@@ -2,10 +2,15 @@ from dotenv import load_dotenv
 from Emailer import *
 import os, json
 
-def create_step(instruction):
-    check_symbol = "☐"
+def create_reminder(instruction):
+    check_symbol = "-"
     # check_symbol = "-"
     return "{} {}\n".format(check_symbol, instruction)
+
+def create_step(reminder):
+    check_symbol = "☐"
+    # check_symbol = "-"
+    return "{} {}\n".format(check_symbol, reminder)
 
 def get_header(name, date_maintenance):
     header = "Hi {},\n\nThis is a reminder that tomorrow ({}) is your turn to do the LFL Lab Maintenance. Please refer to the following checklist.\n\n".format(name, date_maintenance)
@@ -16,14 +21,24 @@ def get_signature(bot_name="LFL Bot"):
     # salute = ""
     return "\n\nThank you for your service {},\n{}".format(salute, bot_name)
 
-def create_email_content(name, date_maintenance, instructions, bot_name="LFL Bot"):
+def get_reminders(reminders_list):
+    reminders = []
+    for reminder_string in reminders_list:
+        reminders.append(create_reminder(reminder_string))
+    prompt = "\n\nSome safety considerations from EH&S:\n"
+    reminders = "".join(reminders)
+    return prompt + reminders + "\n"
+
+
+def create_email_content(name, date_maintenance, instructions, reminders, bot_name="LFL Bot"):
     header = get_header(name, date_maintenance)
     steps = []
     for instruction in instructions:
         steps.append(create_step(instruction))
     body = "".join(steps)
+    reminders = get_reminders(reminders)
     signature = get_signature(bot_name)
-    return header + body + signature
+    return header + body + reminders + signature
 
 def extract_lab_maintainer():
     load_dotenv(".env")
