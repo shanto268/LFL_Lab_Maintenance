@@ -37,6 +37,11 @@ def get_user_info(user_id):
     user_name, user_email = data[user_id]["name"], data[user_id]["email"]
     return user_name, user_email
 
+def get_last_user_id():
+    f = open("lab_members.json")
+    data = json.load(f)
+    id_num = int(list(data.keys())[-1])
+    return id_num
 
 def send_email(email,subjectLine, emailContent):
     sms_list = ['']
@@ -46,6 +51,7 @@ def send_email(email,subjectLine, emailContent):
 def update_record(f=".env"):
     # Read in the file
     load_dotenv(f)
+    last_id = get_last_user_id()
 
     with open(f, 'r') as file :
         filedata = file.read()
@@ -53,7 +59,12 @@ def update_record(f=".env"):
     # Replace the target string
     user_id = int(os.environ.get("USER_ID"))
     target = "ID="+str(user_id)
-    update = "ID="+str(user_id+1)
+
+    if user_id != last_id:
+        update = "ID="+str(user_id+1)
+    else:
+        update = "ID="+str(1)
+
     filedata = filedata.replace(target, update)
 
     # Write the file out again
