@@ -12,7 +12,7 @@ Automated email program to remind grad students of lab maintenance duties when i
 
 # To Do:
 
-- [ ] Write scheduler scripts for Windows 🤮: [walk_through](https://www.youtube.com/watch?v=ic4lUiDTbVI)
+- [x] Write scheduler scripts for Windows 🤮: [walk_through](https://www.youtube.com/watch?v=ic4lUiDTbVI)
 
 - [x] Deploy on LFL computer and install python dependencies
 
@@ -24,4 +24,4 @@ Automated email program to remind grad students of lab maintenance duties when i
 
 - [x] Last to first update rule add
 
-- [ ] Document on OneNote
+- [x] Document on OneNote
