@@ -1,6 +1,36 @@
 from dotenv import load_dotenv
 from Emailer import *
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+from ics import Calendar, Event
+from dateutil import tz
 import os, json
+
+
+def send_email_with_calendar_invite(recipient_email, subjectLine, content, p_date, p_time):
+    # Create a calendar event
+    event = Event()
+
+    # Get the local timezone
+    local_tz = tz.gettz('America/Los_Angeles')  # Replace with your actual timezone
+
+    # Set the event begin time with the timezone
+    event.begin = '{}T{}:00'.format(p_date, p_time)
+    event.begin = event.begin.replace(tzinfo=local_tz)
+
+    # Set event name
+    event.name = subjectLine.replace("Reminder ","")
+
+    # Add the event to a calendar
+    calendar = Calendar(events=[event])
+
+    # Convert the event to an ics string
+    ics_string = str(calendar)
+
+    # send email to lab maintainer with the calendar invite attached
+    send_email_invite(recipient_email, subjectLine, content, ics_string)
 
 def create_reminder(instruction):
     check_symbol = "-"
