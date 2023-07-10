@@ -7,3 +7,5 @@ creds/*.json
 creds/*.py
 creds/*.sh
 scheduler_task_windows/*
+*.json
+*.pickle
