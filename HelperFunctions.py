@@ -27,7 +27,41 @@ from google.auth.transport.requests import Request
 import os
 import pickle
 
+
 def create_event_with_dates(summary, location, description, start_time, end_time):
+    # Define the scopes for the Google Calendar API
+    SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+    # Load the service account credentials from the JSON key file
+    creds = Credentials.from_service_account_file('service_key.json', scopes=SCOPES)
+
+    # Build the service
+    service = build('calendar', 'v3', credentials=creds)
+
+    # Define the event
+    event = {
+        'summary': summary,
+        'location': location,
+        'description': description,
+        'start': {
+            'date': start_time,
+            'timeZone': 'America/Los_Angeles',
+        },
+        'end': {
+            'date': end_time,
+            'timeZone': 'America/Los_Angeles',
+        },
+        'visibility': 'public',  # Make the event public
+    }
+
+    # Call the Calendar API to create the event
+    event = service.events().insert(calendarId='primary', body=event).execute()
+
+    # Return the link to the event
+    return event['htmlLink']
+
+
+def create_event_with_dates_v0(summary, location, description, start_time, end_time):
     # Define the scopes for the Google Calendar API
     SCOPES = ['https://www.googleapis.com/auth/calendar']
 
